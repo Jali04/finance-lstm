@@ -1,0 +1,10 @@
+jupyterlab
+ipykernel
+numpy
+pandas
+matplotlib
+yfinance
+scikit-learn
+tensorflow
+ta
+statsmodels
