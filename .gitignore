@@ -1,0 +1,17 @@
+# venv
+.venv/
+venv/
+
+# Bytecode
+__pycache__/
+*.pyc
+
+# Jupyter Checkpoints
+.ipynb_checkpoints/
+
+# Ergebnisse/Artefakte
+results/
+runs/
+
+# große Rohdaten (optional separat verwalten)
+data/raw/
