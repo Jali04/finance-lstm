@@ -71,3 +71,24 @@ def test_read_prices_normalises_column_names(tmp_path):
         "close",
         "volume",
     }
+
+
+def test_read_prices_maps_price_alias_to_close(tmp_path):
+    df = pd.DataFrame(
+        {
+            "Price": [1.5, 2.5],
+            "High": [2.0, 3.0],
+            "Low": [0.5, 1.5],
+            "Open": [1.0, 2.0],
+            "Volume": [100, 200],
+        },
+        index=pd.Index(["2024-01-01", "2024-01-02"], name="date"),
+    )
+    csv_path = tmp_path / "prices.csv"
+    _write_csv(df, csv_path)
+
+    result = read_prices(csv_path)
+
+    assert "close" in result.columns
+    # Ensure the alias did not lead to duplicate columns being kept.
+    assert set(result.columns) == {"open", "high", "low", "close", "volume"}
