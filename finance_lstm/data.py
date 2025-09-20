@@ -1,7 +1,7 @@
 """Utilities for loading and cleaning price data."""
 from __future__ import annotations
 
-from typing import List
+from typing import Dict, List
 
 import pandas as pd
 
@@ -9,6 +9,13 @@ import pandas as pd
 MANDATORY_COLUMNS: List[str] = ["open", "high", "low", "close", "volume"]
 # Optional columns that are allowed to appear in addition to the mandatory ones.
 OPTIONAL_COLUMNS: List[str] = ["adjclose"]
+
+# Common aliases that should be mapped to the canonical column names in
+# :data:`MANDATORY_COLUMNS` when encountered in the CSV header.
+MANDATORY_ALIASES: Dict[str, List[str]] = {
+    # Some brokers label the last price column simply as "Price".
+    "close": ["price", "last", "last price", "schlusspreis"],
+}
 
 
 def _has_ticker_in_colname(df: pd.DataFrame) -> bool:
@@ -61,6 +68,19 @@ def read_prices(csv_path: str) -> pd.DataFrame:
     # capitalisation or stray whitespace differences that often occur in
     # CSV exports from broker platforms.
     df.columns = [str(col).strip().lower() for col in df.columns]
+
+    # Map known alias column names to their canonical counterparts before
+    # validating the presence of the mandatory set.
+    rename_map: Dict[str, str] = {}
+    for canonical, aliases in MANDATORY_ALIASES.items():
+        if canonical in df.columns:
+            continue
+        for alias in aliases:
+            if alias in df.columns:
+                rename_map[alias] = canonical
+                break
+    if rename_map:
+        df = df.rename(columns=rename_map)
 
     missing_required = [c for c in MANDATORY_COLUMNS if c not in df.columns]
     if missing_required:
