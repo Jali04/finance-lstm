@@ -57,6 +57,11 @@ def read_prices(csv_path: str) -> pd.DataFrame:
     df.index = pd.to_datetime(df.index, errors="coerce")
     df = df[~df.index.isna()]
 
+    # Normalise column names to make the loader resilient against
+    # capitalisation or stray whitespace differences that often occur in
+    # CSV exports from broker platforms.
+    df.columns = [str(col).strip().lower() for col in df.columns]
+
     missing_required = [c for c in MANDATORY_COLUMNS if c not in df.columns]
     if missing_required:
         missing_list = ", ".join(missing_required)
