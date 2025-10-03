@@ -1,8 +1,6 @@
 features:
 - logret_1d
 - vola_10d
-- sma_10
-- sma_20
 - sma_diff
 leakage_note: "Nur r\xFCckw\xE4rtsgerichtete Rolling/Diff \u2013 kein Future-Leakage."
-name: features_v1
+name: features_v1_stationary

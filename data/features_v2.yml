@@ -1,0 +1,18 @@
+features:
+- logret_1d
+- logret_3d
+- logret_5d
+- realized_vol_10
+- bb_pos
+- rsi_14
+- macd
+- macd_sig
+- macd_diff
+- vol_z_20
+- sma_diff
+label:
+  epsilon: 0.0
+  horizon: 1
+  mode: abs
+name: features_v2
+note: "Nur r\xFCckw\xE4rtsgerichtete Rolling/EMA; keine Future-Leaks."
