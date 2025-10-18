@@ -11,8 +11,8 @@ features:
 - vol_z_20
 - sma_diff
 label:
-  epsilon: 0.0
-  horizon: 1
+  epsilon: 0.0005
+  horizon: 5
   mode: abs
 name: features_v2
 note: "Nur r\xFCckw\xE4rtsgerichtete Rolling/EMA; keine Future-Leaks."
