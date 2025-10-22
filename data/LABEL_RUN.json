@@ -1,8 +1,8 @@
 {
-  "train_csv": "../data/AAPL_1d_2012-01-01_2025-09-01_cls_h5_abs0p0005.csv",
+  "train_csv": "../data/AAPL_1d_2012-01-01_2025-09-01_cls_h1_abs0p0005.csv",
   "features_yaml": "../data/features_v2.yml",
   "label": {
-    "horizon": 5,
+    "horizon": 1,
     "epsilon": 0.0005,
     "mode": "abs"
   }

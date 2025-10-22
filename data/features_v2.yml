@@ -1,3 +1,4 @@
+name: features_v2
 features:
 - logret_1d
 - logret_3d
@@ -10,9 +11,20 @@ features:
 - macd_diff
 - vol_z_20
 - sma_diff
+feature_docs:
+  logret_1d: "Log-Return t\u2192t+1 (1 Tag)."
+  logret_3d: "Summe Log-Returns \xFCber 3 Tage (rolling, mp=3)."
+  logret_5d: "Summe Log-Returns \xFCber 5 Tage (rolling, mp=5)."
+  realized_vol_10: "Realisiert. Std der 1d-Logreturns \xFCber 10 Tage."
+  bb_pos: "Position relativ zu Bollinger-B\xE4ndern (SMA20\xB12*Std)."
+  rsi_14: Relative Strength Index (14).
+  macd: EMA12-EMA26.
+  macd_sig: MACD Signal (EMA9 von MACD).
+  macd_diff: MACD minus Signal.
+  vol_z_20: "Z-Score der Log-Volumen (Median/MAD \xFCber 20, clipped \xB110)."
+  sma_diff: "SMA10/SMA20 - 1 (Trendverh\xE4ltnis)."
 label:
+  horizon: 1
   epsilon: 0.0005
-  horizon: 5
   mode: abs
-name: features_v2
 note: "Nur r\xFCckw\xE4rtsgerichtete Rolling/EMA; keine Future-Leaks."
